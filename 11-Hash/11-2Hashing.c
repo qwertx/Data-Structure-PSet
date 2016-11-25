@@ -8,19 +8,19 @@ typedef int Index;
 typedef Index Position;
 
 typedef enum {
-	Legitimate, Empty, Deleted
+    Legitimate, Empty, Deleted
 } EntryType;
 
 typedef struct HashEntry Cell;
 struct HashEntry {
-	ElementType Data;
-	EntryType Info;
+    ElementType Data;
+    EntryType Info;
 };
 
 typedef struct TblNode *HashTable;
 struct TblNode {
-	int TableSize;
-	Cell *Cells;
+    int TableSize;
+    Cell *Cells;
 };
 
 int flag = 1; // if the first print
@@ -44,15 +44,15 @@ int NextPrime(int N) {
 }
 
 HashTable CreateTable (int TableSize) {
-	HashTable H;
-	int i;
-	H = (HashTable)malloc(sizeof(struct TblNode));
-	// find table size
-	H->TableSize = NextPrime(TableSize);
-	H->Cells = (Cell*)malloc(H->TableSize * sizeof(Cell));
-	for(i = 0; i < H->TableSize; i++)
-		H->Cells[i].Info = Empty; // empty is 1
-	return H;
+    HashTable H;
+    int i;
+    H = (HashTable)malloc(sizeof(struct TblNode));
+    // find table size
+    H->TableSize = NextPrime(TableSize);
+    H->Cells = (Cell*)malloc(H->TableSize * sizeof(Cell));
+    for(i = 0; i < H->TableSize; i++)
+        H->Cells[i].Info = Empty; // empty is 1
+    return H;
 }
 
 int Hash(ElementType Key, int size) {
@@ -60,41 +60,41 @@ int Hash(ElementType Key, int size) {
 }
 
 Position Find(HashTable H, ElementType Key) {
-	// Quadratic Probing
-	Position CurrentPos, NewPos;
-	int CNum = 0; // time of conflict
-	NewPos = CurrentPos = Hash(Key, H->TableSize);
-	while(H->Cells[NewPos].Info != Empty && H->Cells[NewPos].Data != Key && CNum < 10000) {
+    // Quadratic Probing
+    Position CurrentPos, NewPos;
+    int CNum = 0; // time of conflict
+    NewPos = CurrentPos = Hash(Key, H->TableSize);
+    while(H->Cells[NewPos].Info != Empty && H->Cells[NewPos].Data != Key && CNum < 10000) {
         CNum++;
-		NewPos = CurrentPos + CNum * CNum;
-		if(NewPos >= H->TableSize)
-			NewPos = NewPos % H->TableSize;
-	}
+        NewPos = CurrentPos + CNum * CNum;
+        if(NewPos >= H->TableSize)
+            NewPos = NewPos % H->TableSize;
+    }
     if(H->Cells[NewPos].Info == Legitimate)
         return -1;
     else
-	    return NewPos;
+        return NewPos;
 }
 
 void Insert(HashTable H, ElementType Key) {
-	Position Pos = Find(H, Key);
-	if(Pos != -1) {
-		H->Cells[Pos].Info = Legitimate;
-		H->Cells[Pos].Data = Key;
-		if(flag == 1) {
-		    printf("%d", Pos);
-		    flag = 0;
-		    return;
-		}
-		else {
-		    printf(" %d", Pos);
-		    return;
-		}
-	}
-	else {
-		printf(" -");
-		return;
-	}
+    Position Pos = Find(H, Key);
+    if(Pos != -1) {
+        H->Cells[Pos].Info = Legitimate;
+        H->Cells[Pos].Data = Key;
+        if(flag == 1) {
+            printf("%d", Pos);
+            flag = 0;
+            return;
+        }
+        else {
+            printf(" %d", Pos);
+            return;
+        }
+    }
+    else {
+        printf(" -");
+        return;
+    }
 }
 
 int main() {
