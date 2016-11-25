@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
-// definition of a binary tree using a static linked list
+
 #define MaxTree 10
 #define Tree int
 #define Null -1  // not NULL
@@ -65,10 +65,9 @@ Tree BuildTree(struct TreeNode T[]) {
     scanf("%d\n", &N); //number of nodes
     if(N == 0) return Null;
     int check[N];
-
     if(N) {
-        for(i = 0; i < N; i++) check[i] = 0; // if used by other nodes
-
+        for(i = 0; i < N; i++) 
+            check[i] = 0; // if used by other nodes
         for(i = 0; i < N; i++) {
             scanf("%c %c\n", &cl, &cr);
             // index of left son
@@ -93,14 +92,13 @@ Tree BuildTree(struct TreeNode T[]) {
 }
 
 void ListLeaves(Tree R) {
-    if(R == Null) return;
-    
+    if(R == Null) 
+        return;
     Tree r;
     Queue Q;
     Q = CreateQueue(MaxTree);
     AddQ(Q, R);
     int result[10], i = 0, k;
-
     while(!IsEmpty(Q)) {
         r = DeleteQ(Q);
         if(T[r].Left == Null && T[r].Right == Null){
