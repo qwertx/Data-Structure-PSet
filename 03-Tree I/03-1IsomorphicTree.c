@@ -1,10 +1,9 @@
 #include <stdio.h>
-// definition of a binary tree using a static linked list
+
 #define MaxTree 10
 #define ElementType char
 #define Tree int
 #define Null -1  // not NULL
-
 
 struct TreeNode {
     ElementType Element;
@@ -20,8 +19,8 @@ Tree BuildTree(struct TreeNode T[]) {
     int check[N];
 
     if(N) {
-        for(i = 0; i < N; i++) check[i] = 0; // if used by other nodes
-
+        for(i = 0; i < N; i++)
+            check[i] = 0; // if used by other nodes
         for(i = 0; i < N; i++) {
             scanf("%c %c %c\n", &T[i].Element, &cl, &cr);
             // index of left son
@@ -66,9 +65,7 @@ int main() {
     Tree R1, R2;
     R1 = BuildTree(T1);
     R2 = BuildTree(T2);
-
     if(Isomorphic(R1, R2)) printf("Yes");
     else printf("No");
-
     return 0;
 }
