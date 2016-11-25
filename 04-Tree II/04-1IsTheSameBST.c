@@ -32,7 +32,6 @@ Tree Insert(Tree T, int V) {
 Tree MakeTree(int N) {
     Tree T;
     int i, V;
-
     scanf("%d", &V);  // first number
     T = NewNode(V); 
     for(i = 1; i < N; i++) { //other numbers
@@ -91,7 +90,6 @@ void FreeTree(Tree T) {
 int main() {
     int N, L, i;
     Tree T;
-
     scanf("%d", &N);
     while(N) {
         scanf("%d", &L);
