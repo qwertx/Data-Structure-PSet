@@ -5,10 +5,10 @@ void Sort(int A[], int T[], int Used[], int i, int *cnt) {
     // one cycle
     while(T[index] != startOfCycle) {
     	if(A[index] == 0 && hasZero == 0)
-    		hasZero = 1;
+    	    hasZero = 1;
     	if(hasZero == 1) {
-    		(*cnt) = (*cnt) - 2;
-    		hasZero = 2;
+    	    (*cnt) = (*cnt) - 2;
+    	    hasZero = 2;
     	}
         Used[index] = 1;
         (*cnt)++;
@@ -16,11 +16,11 @@ void Sort(int A[], int T[], int Used[], int i, int *cnt) {
     }
     // last element in one cycle
     if(A[index] == 0 && hasZero == 0)
-		hasZero = 1;
-	if(hasZero == 1) {
-		(*cnt) = (*cnt) - 2;
-		hasZero = 2;
-	}
+	hasZero = 1;
+    if(hasZero == 1) {
+	(*cnt) = (*cnt) - 2;
+	hasZero = 2;
+    }
     Used[index] = 1;
     (*cnt) = (*cnt) + 2;
 }
