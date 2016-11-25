@@ -17,7 +17,6 @@ Tree BuildTree(struct TreeNode T[]) {
     scanf("%d\n", &N); //number of nodes
     if(N == 0) return Null;
     int check[N];
-
     if(N) {
         for(i = 0; i < N; i++)
             check[i] = 0; // if used by other nodes
