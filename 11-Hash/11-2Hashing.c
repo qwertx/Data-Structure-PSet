@@ -26,21 +26,21 @@ struct TblNode {
 int flag = 1; // if the first print
 
 int NextPrime(int N) {
-	// the min prime number > N but <= MAXTABLESIZE
-	int i, p = (N % 2) ? (N + 2) : (N + 1);
-	if(N == 1)
-	   return 2;
-	while(p <= MAXTABLESIZE) {
-		for(i = (int)sqrt(p); i > 2; i--) {
-			if(!(p % i))
-				break; // p is not a prime
-		}
-		if(i == 2)
-			break; // p is a prime
-		else
-			p += 2; // next number
+    // the min prime number > N but <= MAXTABLESIZE
+    int i, p = (N % 2) ? (N + 2) : (N + 1);
+    if(N == 1)
+        return 2;
+    while(p <= MAXTABLESIZE) {
+        for(i = (int)sqrt(p); i > 2; i--) {
+	    if(!(p % i))
+	        break; // p is not a prime
 	}
-	return p;
+	if(i == 2)
+	    break; // p is a prime
+	else
+	    p += 2; // next number
+    }
+    return p;
 }
 
 HashTable CreateTable (int TableSize) {
