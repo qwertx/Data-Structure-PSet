@@ -5,6 +5,7 @@ struct UserNode {
     int perfect;
     int total;
     int PSet[5];
+    int answered;
 };
 typedef struct UserNode *User;
 
@@ -26,6 +27,7 @@ void Initialize(User U) {
     int i;
     U->perfect = 0;
     U->total = -1;
+    U->answered = 0;
     for(i = 0; i < 5; i++)
         U->PSet[i] = -1; // -1 represent never submitted
 }
@@ -35,9 +37,11 @@ void ReadData(User *A) {
     scanf("%d %d %d", &id, &Problem, &score);
     id--;
     Problem--;
+    if(score != -1 && ((*A)[id].answered == 0))
+        (*A)[id].answered = 1;
     if(score == -1) // did not pass compiler
         score = 0;
-    if((*A)[id].total == -1) // no total scores yet
+    if((*A)[id].total == -1 && ((*A)[id].answered == 1)) // no total scores yet
         (*A)[id].total = 0;
     if((*A)[id].PSet[Problem] == FullMarks[Problem]) // has got the FullMarks
         return;
@@ -122,7 +126,7 @@ void Sort(User A[], int f, int N, int NoP) {
     // insert and sort
     for(i = 0; i < N; i++) {
         total = (*A)[i].total;
-        if(total == -1 || total == 0)
+        if(total == -1 || ((*A)[i].answered == 0))
             continue;
         Insert(A, &B[total], i);
     }
